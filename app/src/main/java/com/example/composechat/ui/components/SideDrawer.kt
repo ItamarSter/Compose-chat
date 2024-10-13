@@ -1,12 +1,7 @@
 package com.example.composechat.ui.components
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.DrawerState
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
@@ -52,17 +47,15 @@ fun SideDrawer(
             }
         }
     ) {
-        Column {
-            IconButton(onClick = {
+        TopBar(
+            navController,
+            onNavIconClick = {
                 scope.launch {
                     drawerState.apply {
                         if (isClosed) open() else close()
                     }
                 }
-            }) {
-                Icon(imageVector = Icons.Filled.Menu, contentDescription = "")
             }
-            MainNavGraph(navController)
-        }
+        )
     }
 }
