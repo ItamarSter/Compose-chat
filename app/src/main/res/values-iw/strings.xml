@@ -3,4 +3,6 @@
     <string name="app_name">שיחות</string>
     <string name="my_chats">השיחות שלי</string>
     <string name="chat">שיחה</string>
+    <string name="create_new_chat">צור שיחה חדשה</string>
+    <string name="join_to_chat">הצטרף לשיחה</string>
 </resources>
