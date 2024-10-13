@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Compose Chat</string>
+    <string name="my_chats">My Chats</string>
+    <string name="chat">Chat</string>
 </resources>
