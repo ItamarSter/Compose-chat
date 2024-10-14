@@ -17,7 +17,8 @@ import com.example.composechat.R
 fun SideDrawerDialog(
     title: String,
     hint: String,
-    onDismissRequest: () -> Unit
+    onDismissRequest: () -> Unit,
+    onConfirm: (String) -> Unit
 ) {
     var textFieldValue by remember { mutableStateOf("") }
 
@@ -34,7 +35,12 @@ fun SideDrawerDialog(
         },
         onDismissRequest = onDismissRequest,
         confirmButton = {
-            Button(onClick = { /*TODO*/ }) {
+            Button(
+                onClick = {
+                    onConfirm(textFieldValue)
+                    onDismissRequest()
+                }
+            ) {
                 Text(text = stringResource(id = R.string.confirm))
             }
         },

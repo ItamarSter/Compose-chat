@@ -2,6 +2,7 @@ package com.example.composechat.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,12 +22,16 @@ import androidx.compose.ui.unit.dp
 import com.example.composechat.module.Chat
 
 @Composable
-fun ChatItem(chat: Chat) {
+fun ChatItem(
+    chat: Chat,
+    onClick: (String) -> Unit
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .height(100.dp)
-            .background(color = Color.Gray),
+            .background(color = Color.Gray)
+            .clickable { onClick(chat.code) },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box(modifier = Modifier

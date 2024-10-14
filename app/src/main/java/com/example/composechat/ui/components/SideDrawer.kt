@@ -22,12 +22,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.composechat.R
 import com.example.composechat.ui.MainViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 
 @Composable
 fun SideDrawer(
     navController: NavHostController,
-    drawerState: DrawerState
+    drawerState: DrawerState,
+    viewModel: MainViewModel = hiltViewModel()
 ) {
     val scope = rememberCoroutineScope()
     var showDialog by remember { mutableStateOf<SideDrawerOptions>(SideDrawerOptions.None) }
@@ -73,14 +75,20 @@ fun SideDrawer(
                 SideDrawerDialog(
                     title = stringResource(id = R.string.create_new_chat),
                     hint = stringResource(id = R.string.enter_new_chat_name),
-                    onDismissRequest = { showDialog = SideDrawerOptions.None }
+                    onDismissRequest = { showDialog = SideDrawerOptions.None },
+                    onConfirm = { newChatName ->
+                        viewModel.createNewChat(newChatName)
+                    }
                 )
             }
             SideDrawerOptions.JoinToChat -> {
                 SideDrawerDialog(
                     title = stringResource(id = R.string.join_to_chat),
                     hint = stringResource(id = R.string.enter_chat_code),
-                    onDismissRequest = { showDialog = SideDrawerOptions.None }
+                    onDismissRequest = { showDialog = SideDrawerOptions.None },
+                    onConfirm = { chatCode ->
+                        viewModel.joinToChat(chatCode)
+                    }
                 )
             }
         }

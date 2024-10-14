@@ -7,22 +7,29 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.example.composechat.ui.screens.ChatScreen
 import com.example.composechat.ui.screens.MyChatsScreen
 
 @Composable
 fun MainNavGraph(
     innerPaddingValues: PaddingValues,
-    navController: NavHostController
+    navController: NavHostController,
+    onRouteChanged: (Route) -> Unit
 ) {
 
     NavHost(modifier = Modifier.padding(innerPaddingValues), navController = navController, startDestination = "MyChatsScreen") {
-        composable("MyChatsScreen") {
+        composable(Route.MyChatsScreen.routeName) {
+            onRouteChanged(Route.MyChatsScreen)
             MyChatsScreen(navController = navController)
         }
-        composable("ChatScreen") {
+        composable(Route.ChatScreen.routeName) {
+            onRouteChanged(Route.ChatScreen)
             ChatScreen(navController = navController)
         }
     }
+}
+
+sealed class Route(val routeName: String) {
+    data object MyChatsScreen: Route("MyChatsScreen")
+    data object ChatScreen: Route("ChatScreen")
 }
