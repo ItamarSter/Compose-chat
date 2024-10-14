@@ -40,6 +40,6 @@ fun TopBar(
             )
         },
     ) { innerPadding ->
-        MainNavGraph(navController)
+        MainNavGraph(innerPadding, navController)
     }
 }

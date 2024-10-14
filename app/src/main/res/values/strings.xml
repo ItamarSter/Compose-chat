@@ -4,4 +4,7 @@
     <string name="chat">Chat</string>
     <string name="create_new_chat">Create new chat</string>
     <string name="join_to_chat">Join to chat</string>
+    <string name="enter_new_chat_name">Enter new chat name</string>
+    <string name="enter_chat_code">Enter chat code</string>
+    <string name="confirm">Confirm</string>
 </resources>

@@ -5,4 +5,7 @@
     <string name="chat">שיחה</string>
     <string name="create_new_chat">צור שיחה חדשה</string>
     <string name="join_to_chat">הצטרף לשיחה</string>
+    <string name="enter_chat_code">הכנס קוד שיחה</string>
+    <string name="enter_new_chat_name">הכנס שם שיחה חדש</string>
+    <string name="confirm">אישור</string>
 </resources>

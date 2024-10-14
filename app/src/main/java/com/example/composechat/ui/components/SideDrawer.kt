@@ -1,19 +1,27 @@
 package com.example.composechat.ui.components
 
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.composechat.R
+import com.example.composechat.ui.MainViewModel
 import kotlinx.coroutines.launch
 
 @Composable
@@ -22,6 +30,8 @@ fun SideDrawer(
     drawerState: DrawerState
 ) {
     val scope = rememberCoroutineScope()
+    var showDialog by remember { mutableStateOf<SideDrawerOptions>(SideDrawerOptions.None) }
+
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
@@ -34,7 +44,7 @@ fun SideDrawer(
                     },
                     shape = RectangleShape,
                     selected = false,
-                    onClick = { }
+                    onClick = { showDialog = SideDrawerOptions.CreateNewChat }
                 )
                 NavigationDrawerItem(
                     label = {
@@ -42,7 +52,7 @@ fun SideDrawer(
                     },
                     shape = RectangleShape,
                     selected = false,
-                    onClick = { }
+                    onClick = { showDialog = SideDrawerOptions.JoinToChat }
                 )
             }
         }
@@ -57,5 +67,29 @@ fun SideDrawer(
                 }
             }
         )
+        when (showDialog) {
+            SideDrawerOptions.None -> {}
+            SideDrawerOptions.CreateNewChat -> {
+                SideDrawerDialog(
+                    title = stringResource(id = R.string.create_new_chat),
+                    hint = stringResource(id = R.string.enter_new_chat_name),
+                    onDismissRequest = { showDialog = SideDrawerOptions.None }
+                )
+            }
+            SideDrawerOptions.JoinToChat -> {
+                SideDrawerDialog(
+                    title = stringResource(id = R.string.join_to_chat),
+                    hint = stringResource(id = R.string.enter_chat_code),
+                    onDismissRequest = { showDialog = SideDrawerOptions.None }
+                )
+            }
+        }
     }
+}
+
+
+sealed class SideDrawerOptions {
+    data object CreateNewChat : SideDrawerOptions()
+    data object JoinToChat : SideDrawerOptions()
+    data object None : SideDrawerOptions()
 }
